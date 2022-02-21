@@ -41,7 +41,8 @@ class ElasticsearchProxy():
         'column': 'column_names.raw',
         'database': 'database.raw',
         'cluster': 'cluster.raw',
-        'description': 'description'
+        'description': 'description',
+        'resource_type': 'resource_type'
     }
 
     # mapping to translate request for dashboard resources
@@ -54,7 +55,8 @@ class ElasticsearchProxy():
         'product': 'product',
         'tag': 'tags',
         'description': 'description',
-        'last_successful_run_timestamp': 'last_successful_run_timestamp'
+        'last_successful_run_timestamp': 'last_successful_run_timestamp',
+        'resource_type': 'resource_type'
     }
 
     # mapping to translate request for feature resources
@@ -68,14 +70,16 @@ class ElasticsearchProxy():
         'availability': 'availability.raw',
         'tags': 'tags',
         'badges': 'badges',
-        'description': 'description'
+        'description': 'description',
+        'resource_type': 'resource_type'
     }
 
     USER_MAPPING = {
         'full_name': 'full_name',
         'first_name': 'first_name',
         'last_name': 'last_name',
-        'email': 'email'
+        'email': 'email',
+        'resource_type': 'resource_type'
     }
 
     RESOUCE_TO_MAPPING = {
