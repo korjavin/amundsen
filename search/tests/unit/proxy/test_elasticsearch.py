@@ -8,9 +8,9 @@ from typing import (  # noqa: F401
 from unittest import mock
 from unittest.mock import MagicMock, patch
 
+from amundsen_common.models.api import health_check
 from elasticsearch_dsl import Search
 
-from amundsen_common.models.api import health_check
 from search_service import create_app
 from search_service.api.feature import FEATURE_INDEX
 from search_service.api.table import TABLE_INDEX
