@@ -240,7 +240,7 @@ class ElasticsearchProxy():
             if r.success():
                 results_count = r.hits.total.value
                 if results_count > 0:
-                    resource_type = r.hits.hits[0]._type
+                    resource_type = r.hits.hits[0]['resource_type']
                     results = []
                     for search_result in r.hits.hits:
                         # mapping gives all the fields in the response

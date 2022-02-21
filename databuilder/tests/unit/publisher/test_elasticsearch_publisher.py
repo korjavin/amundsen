@@ -69,8 +69,7 @@ class TestElasticsearchPublisher(unittest.TestCase):
             # ensure indices create endpoint was called
             default_mapping = ElasticsearchPublisher.DEFAULT_ELASTICSEARCH_INDEX_MAPPING
             self.mock_es_client.indices.create.assert_called_once_with(index=self.test_es_new_index,
-                                                                       body=default_mapping,
-                                                                       params={'include_type_name': 'true'})
+                                                                       body=default_mapping)
 
             # bulk endpoint called once
             self.mock_es_client.bulk.assert_called_once_with(
@@ -103,8 +102,7 @@ class TestElasticsearchPublisher(unittest.TestCase):
             # ensure indices create endpoint was called
             default_mapping = ElasticsearchPublisher.DEFAULT_ELASTICSEARCH_INDEX_MAPPING
             self.mock_es_client.indices.create.assert_called_once_with(index=self.test_es_new_index,
-                                                                       body=default_mapping,
-                                                                       params={'include_type_name': 'true'})
+                                                                       body=default_mapping)
 
             # bulk endpoint called once
             self.mock_es_client.bulk.assert_called_once_with(

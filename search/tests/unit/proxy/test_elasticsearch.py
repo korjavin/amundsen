@@ -8,9 +8,9 @@ from typing import (  # noqa: F401
 from unittest import mock
 from unittest.mock import MagicMock, patch
 
-from amundsen_common.models.api import health_check
 from elasticsearch_dsl import Search
 
+from amundsen_common.models.api import health_check
 from search_service import create_app
 from search_service.api.feature import FEATURE_INDEX
 from search_service.api.table import TABLE_INDEX
@@ -37,6 +37,7 @@ class MockSearchResult:
                  tags: Iterable[Tag],
                  badges: Iterable[Tag],
                  last_updated_timestamp: int,
+                 resource_type: str,
                  programmatic_descriptions: List[str] = None) -> None:
         self.name = name
         self.key = key
@@ -49,6 +50,7 @@ class MockSearchResult:
         self.badges = badges
         self.last_updated_timestamp = last_updated_timestamp
         self.programmatic_descriptions = programmatic_descriptions
+        self.resource_type = resource_type
 
 
 class MockUserSearchResult:
@@ -63,7 +65,8 @@ class MockUserSearchResult:
                  is_active: bool,
                  employee_type: str,
                  role_name: str,
-                 new_attr: str) -> None:
+                 new_attr: str,
+                 resource_type: str) -> None:
         self.full_name = full_name
         self.first_name = first_name
         self.last_name = last_name
@@ -75,6 +78,7 @@ class MockUserSearchResult:
         self.employee_type = employee_type
         self.new_attr = new_attr
         self.role_name = role_name
+        self.resource_type = resource_type
 
 
 class Response:
@@ -111,6 +115,7 @@ class TestElasticsearchProxy(unittest.TestCase):
         self.mock_empty_badge = []  # type: List[Tag]
         self.mock_empty_tag = []  # type: List[Tag]
         self.mock_result1 = MockSearchResult(name='test_table',
+                                             resource_type='table',
                                              key='test_key',
                                              description='test_description',
                                              cluster='gold',
@@ -123,6 +128,7 @@ class TestElasticsearchProxy(unittest.TestCase):
                                              programmatic_descriptions=[])
 
         self.mock_result2 = MockSearchResult(name='test_table2',
+                                             resource_type='table',
                                              key='test_key2',
                                              description='test_description2',
                                              cluster='gold',
@@ -155,7 +161,8 @@ class TestElasticsearchProxy(unittest.TestCase):
                                                  is_active=True,
                                                  employee_type='FTE',
                                                  role_name='swe',
-                                                 new_attr='aaa')
+                                                 new_attr='aaa',
+                                                 resource_type='user',)
 
     def test_setup_client(self) -> None:
         self.es_proxy = ElasticsearchProxy(
@@ -165,7 +172,7 @@ class TestElasticsearchProxy(unittest.TestCase):
         )
         a = self.es_proxy.elasticsearch
         for client in [a, a.cat, a.cluster, a.indices, a.ingest, a.nodes, a.snapshot, a.tasks]:
-            _host = client.transport.hosts[0]   # type: ignore
+            _host = client.transport.hosts[0]  # type: ignore
             self.assertEqual(_host['host'], "0.0.0.0")
             self.assertEqual(_host['port'], 9200)
 
@@ -442,7 +449,7 @@ class TestElasticsearchProxy(unittest.TestCase):
         }
 
         expected_result = self.es_proxy.parse_filters(test_filters, index=TABLE_INDEX) + " AND " + \
-            self.es_proxy.parse_query_term(term, index=TABLE_INDEX)
+                          self.es_proxy.parse_query_term(term, index=TABLE_INDEX)
         ret_result = self.es_proxy.convert_query_json_to_query_dsl(search_request=search_request,
                                                                    query_term=term,
                                                                    index=TABLE_INDEX)
