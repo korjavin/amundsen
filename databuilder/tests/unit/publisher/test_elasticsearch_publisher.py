@@ -73,7 +73,7 @@ class TestElasticsearchPublisher(unittest.TestCase):
 
             # bulk endpoint called once
             self.mock_es_client.bulk.assert_called_once_with(
-                [{'index': {'_type': self.test_doc_type, '_index': self.test_es_new_index}},
+                [{'index': {'_index': self.test_es_new_index}},
                  {'KEY_DOESNOT_MATTER': 'NO_VALUE', 'KEY_DOESNOT_MATTER2': 'NO_VALUE2'}]
             )
 
@@ -106,7 +106,7 @@ class TestElasticsearchPublisher(unittest.TestCase):
 
             # bulk endpoint called once
             self.mock_es_client.bulk.assert_called_once_with(
-                [{'index': {'_type': self.test_doc_type, '_index': self.test_es_new_index}},
+                [{'index': {'_index': self.test_es_new_index}},
                  {'KEY_DOESNOT_MATTER': 'NO_VALUE', 'KEY_DOESNOT_MATTER2': 'NO_VALUE2'}]
             )
 
