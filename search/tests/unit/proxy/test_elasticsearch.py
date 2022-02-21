@@ -162,7 +162,7 @@ class TestElasticsearchProxy(unittest.TestCase):
                                                  employee_type='FTE',
                                                  role_name='swe',
                                                  new_attr='aaa',
-                                                 resource_type='user',)
+                                                 resource_type='user', )
 
     def test_setup_client(self) -> None:
         self.es_proxy = ElasticsearchProxy(
@@ -449,7 +449,7 @@ class TestElasticsearchProxy(unittest.TestCase):
         }
 
         expected_result = self.es_proxy.parse_filters(test_filters, index=TABLE_INDEX) + " AND " + \
-                          self.es_proxy.parse_query_term(term, index=TABLE_INDEX)
+            self.es_proxy.parse_query_term(term, index=TABLE_INDEX)
         ret_result = self.es_proxy.convert_query_json_to_query_dsl(search_request=search_request,
                                                                    query_term=term,
                                                                    index=TABLE_INDEX)

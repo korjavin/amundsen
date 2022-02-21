@@ -706,16 +706,6 @@ class ElasticsearchProxy(BaseProxy):
         # fetch indices that use our chosen alias
         indices = self._fetch_old_index(index)
 
-        # set the document type
-        if index == USER_INDEX:
-            type = User.get_type()
-        elif index == TABLE_INDEX:
-            type = Table.get_type()
-        elif index == FEATURE_INDEX:
-            type = Feature.get_type()
-        else:
-            raise Exception(f'document deletion not supported for index {index}')
-
         for i in indices:
             # build a list of elasticsearch actions for bulk deletion
             actions = self._build_delete_actions(data=data, index_key=i)
