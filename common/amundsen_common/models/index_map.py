@@ -24,7 +24,6 @@ TABLE_INDEX_MAP = textwrap.dedent(
       }
     },
     "mappings":{
-        "table":{
           "properties": {
             "name": {
               "type":"text",
@@ -108,7 +107,6 @@ TABLE_INDEX_MAP = textwrap.dedent(
             }
           }
         }
-      }
     }
     """
 )
@@ -128,7 +126,6 @@ DASHBOARD_ELASTICSEARCH_INDEX_MAPPING = textwrap.dedent(
           }
         },
         "mappings":{
-            "dashboard":{
               "properties": {
                 "group_name": {
                   "type":"text",
@@ -194,7 +191,6 @@ DASHBOARD_ELASTICSEARCH_INDEX_MAPPING = textwrap.dedent(
                 }
               }
             }
-          }
         }
     """
 )
@@ -203,7 +199,6 @@ USER_INDEX_MAP = textwrap.dedent(
     """
     {
     "mappings":{
-        "user":{
           "properties": {
             "email": {
               "type":"text",
@@ -252,7 +247,6 @@ USER_INDEX_MAP = textwrap.dedent(
             }
           }
         }
-      }
     }
     """
 )
@@ -271,68 +265,66 @@ FEATURE_INDEX_MAP = textwrap.dedent(
       }
     },
     "mappings":{
-        "feature":{
-          "properties": {
-            "feature_group": {
-              "type":"text",
-              "analyzer": "simple",
-              "fields": {
-                "raw": {
-                  "type": "keyword",
-                  "normalizer": "lowercase_normalizer"
-                }
-              }
-            },
-            "feature_name": {
-              "type":"text",
-              "analyzer": "simple",
-              "fields": {
-                "raw": {
-                  "type": "keyword",
-                  "normalizer": "lowercase_normalizer"
-                }
-              }
-            },
-            "version": {
+      "properties": {
+        "feature_group": {
+          "type":"text",
+          "analyzer": "simple",
+          "fields": {
+            "raw": {
               "type": "keyword",
               "normalizer": "lowercase_normalizer"
-            },
-            "key": {
-              "type": "keyword"
-            },
-            "total_usage":{
-              "type": "long"
-            },
-            "status": {
-              "type": "keyword"
-            },
-            "entity": {
-              "type": "keyword"
-            },
-            "description": {
-              "type": "text"
-            },
-            "availability": {
-              "type": "text",
-              "analyzer": "simple",
-              "fields": {
-                "raw": {
-                  "type": "keyword"
-                }
-              }
-            },
-            "badges": {
-              "type": "keyword"
-            },
-            "tags": {
-              "type": "keyword"
-            },
-            "last_updated_timestamp": {
-              "type": "date",
-              "format": "epoch_second"
             }
           }
+        },
+        "feature_name": {
+          "type":"text",
+          "analyzer": "simple",
+          "fields": {
+            "raw": {
+              "type": "keyword",
+              "normalizer": "lowercase_normalizer"
+            }
+          }
+        },
+        "version": {
+          "type": "keyword",
+          "normalizer": "lowercase_normalizer"
+        },
+        "key": {
+          "type": "keyword"
+        },
+        "total_usage":{
+          "type": "long"
+        },
+        "status": {
+          "type": "keyword"
+        },
+        "entity": {
+          "type": "keyword"
+        },
+        "description": {
+          "type": "text"
+        },
+        "availability": {
+          "type": "text",
+          "analyzer": "simple",
+          "fields": {
+            "raw": {
+              "type": "keyword"
+            }
+          }
+        },
+        "badges": {
+          "type": "keyword"
+        },
+        "tags": {
+          "type": "keyword"
+        },
+        "last_updated_timestamp": {
+          "type": "date",
+          "format": "epoch_second"
         }
+      }
       }
     }
     """
