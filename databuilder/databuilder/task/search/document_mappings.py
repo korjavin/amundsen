@@ -78,7 +78,7 @@ class SearchableResource(Document):
     usage = RankFeatures()  # values can be used to boost document search score
     last_updated_timestamp = Date()
 
-    document_type = Keyword(required=True)
+    resource_type = Keyword(required=True)
 
 
 class Table(SearchableResource):
