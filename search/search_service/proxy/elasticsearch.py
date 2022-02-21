@@ -732,7 +732,7 @@ class ElasticsearchProxy(BaseProxy):
             index_action = {'index': {'_index': index_key, '_id': item.get_id()}}
             actions.append(index_action)
             document = item.get_attrs_dict()
-            document['resource_type'] = item.get_attrs_dict()
+            document['resource_type'] = item.get_type()
             actions.append(document)
         return actions
 
@@ -743,7 +743,7 @@ class ElasticsearchProxy(BaseProxy):
         for item in data:
             actions.append({'update': {'_index': index_key, '_id': item.get_id()}})
             document = item.get_attrs_dict()
-            document['resource_type'] = item.get_attrs_dict()
+            document['resource_type'] = item.get_type()
             actions.append({'doc': document})
         return actions
 
